@@ -1,8 +1,8 @@
 @echo off 
 set project_name=CH552oneClick
-set xram_size=0x0800
-set xram_loc=0x0600
-set code_size=0xEFFF
+set xram_size=0x0400
+set xram_loc=0x0000
+set code_size=0x2800
 set dfreq_sys=24000000
 
 SDCC\bin\sdcc -c -V -mmcs51 --model-large --xram-size %xram_size% --xram-loc %xram_loc% --code-size %code_size% -I/ -DFREQ_SYS=%dfreq_sys%  main.c
