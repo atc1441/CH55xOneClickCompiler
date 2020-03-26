@@ -5,8 +5,6 @@ set xram_loc=0x0600
 set code_size=0xEFFF
 set dfreq_sys=24000000
 
-if not exist "config.h" echo //add your personal defines here > config.h
-
 SDCC\bin\sdcc -c -V -mmcs51 --model-large --xram-size %xram_size% --xram-loc %xram_loc% --code-size %code_size% -I/ -DFREQ_SYS=%dfreq_sys%  main.c
 SDCC\bin\sdcc -c -V -mmcs51 --model-large --xram-size %xram_size% --xram-loc %xram_loc% --code-size %code_size% -I/ -DFREQ_SYS=%dfreq_sys%  debug.c
 
