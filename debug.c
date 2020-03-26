@@ -1,4 +1,4 @@
-﻿/********************************** (C) COPYRIGHT *******************************
+/********************************** (C) COPYRIGHT *******************************
 * File Name          : Debug.C
 * Author             : WCH
 * Version            : V1.0
@@ -10,14 +10,19 @@
                      看门狗初始化										 
 *******************************************************************************/
 
-#include <stdint.h>
 
+#include <stdint.h>
 #include "CH554.h"
 #include "debug.h"
 
 #ifndef FREQ_SYS
 #define	FREQ_SYS	24000000
 #endif
+
+
+
+FunctionReference runBootloader = (FunctionReference)0x3800;
+
 
 /*******************************************************************************
 * Function Name  : CfgFsys( )
@@ -214,16 +219,18 @@ void CH554UART0SendByte(uint8_t SendDat)
         TI = 0;
 }
 
-void putchar(char c)
+
+int putchar(int c)
 {
-    while (!TI) /* assumes UART is initialized */
-    ;
+    while (!TI);
     TI = 0;
-    SBUF = c;
+    SBUF = c & 0xFF;
+    return c;
 }
 
-char getchar() {
-    while(!RI); /* assumes UART is initialized */
+int getchar() 
+{
+    while(!RI);
     RI = 0;
     return SBUF;
 }
